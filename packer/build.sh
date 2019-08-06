@@ -1,3 +1,3 @@
-#!/bin/bash
+'yes' | terraform apply
 
-packer build -var-file=my-variables.json cassandra.json
+packer build node.json

@@ -3,7 +3,9 @@
     "client_id": "{{env `TF_VAR_clientid`}}",
     "client_secret": "{{env `TF_VAR_clientsecret`}}",
     "tenant_id": "{{env `TF_VAR_tenant_id`}}",
-    "subscription_id": "{{env `TF_VAR_subscription_id`}}"
+    "subscription_id": "{{env `TF_VAR_subscription_id`}}",
+    "storage_account": "adronsimagestorage",
+    "resource_group_name": "adrons-images"
   },
 
   "builders": [{
@@ -14,7 +16,7 @@
     "tenant_id": "{{user `tenant_id`}}",
     "subscription_id": "{{user `subscription_id`}}",
 
-    "managed_image_resource_group_name": "thisOne",
+    "managed_image_resource_group_name": "{{user `resource_group_name`}}",
     "managed_image_name": "base_ubuntu_image",
 
     "os_type": "Linux",
@@ -33,13 +35,10 @@
   "provisioners": [{
     "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
     "inline": [
-      "apt-get update",
-      "apt-get upgrade -y",
-      "apt-get -y install nginx",
-
-      "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+      "echo 'does this even work?'"
     ],
     "inline_shebang": "/bin/sh -x",
     "type": "shell"
   }]
+
 }

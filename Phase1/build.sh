@@ -1,6 +1,11 @@
 GROUPNAME="adrons-images"
 LOCATION="westus2"
 STORAGENAME="adronsimagestorage"
+IMAGECASSANDRA="basecassandra"
+
+echo 'Deleting existing image.'
+
+az image delete -g $GROUPNAME -n $IMAGECASSANDRA
 
 echo 'Creating the managed resource group for images.'
 
@@ -16,7 +21,4 @@ az storage account create \
 
 echo 'Building Apache cluster node image.'
 
-# az ad sp create-for-rbac -n "Packer" --role contributor \
-#                             --scopes /subscriptions/{SubID}
-
-packer build node.json
+packer build -var 'imagename='$IMAGECASSANDRA node-cassandra.json

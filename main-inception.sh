@@ -1,6 +1,6 @@
 cd /phase1
 
-terraform apply
+./build.sh
 
 cd ..
 

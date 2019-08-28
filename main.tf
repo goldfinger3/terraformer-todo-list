@@ -48,10 +48,47 @@ resource "azurerm_kubernetes_cluster" "test" {
   }
 }
 
-output "client_certificate" {
-  value = "${azurerm_kubernetes_cluster.test.kube_config.0.client_certificate}"
+resource "kubernetes_pod" "nginx" {
+  metadata {
+    name = "nginx-example"
+    labels = {
+      App = "nginx"
+    }
+  }
+
+  spec {
+    container {
+      image = "nginx:1.7.8"
+      name  = "example"
+
+      port {
+        container_port = 80
+      }
+    }
+  }
 }
 
-output "kube_config" {
-  value = "${azurerm_kubernetes_cluster.test.kube_config_raw}"
+resource "kubernetes_service" "nginx" {
+  metadata {
+    name = "nginx-example"
+  }
+  spec {
+    selector = {
+      App = kubernetes_pod.nginx.metadata[0].labels.App
+    }
+    port {
+      port        = 80
+      target_port = 80
+    }
+
+    type = "LoadBalancer"
+  }
+}
+
+output "lb_ip" {
+  value = kubernetes_service.nginx.load_balancer_ingress[0].ip
+}
+
+output "lb_hostname" {
+  value = kubernetes_service.nginx.load_balancer_ingress[0].hostname
 }

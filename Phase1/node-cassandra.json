@@ -46,5 +46,4 @@
     "inline_shebang": "/bin/sh -x",
     "type": "shell"
   }]
-
 }

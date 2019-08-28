@@ -5,7 +5,3 @@ cd Phase1
 cd ..
 
 ./main-inception.sh
-
-cd Phase2
-
-./build.sh

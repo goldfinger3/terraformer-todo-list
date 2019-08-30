@@ -1,0 +1,52 @@
+{
+    "variables": {
+      "client_id": "{{env `TF_VAR_clientid`}}",
+      "client_secret": "{{env `TF_VAR_clientsecret`}}",
+      "tenant_id": "{{env `TF_VAR_tenant_id`}}",
+      "subscription_id": "{{env `TF_VAR_subscription_id`}}",
+      "imagename": "",
+      "storage_account": "adronsimagestorage",
+      "resource_group_name": "adrons-images"
+    },
+  
+    "builders": [{
+      "type": "azure-arm",
+  
+      "client_id": "{{user `client_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+      "subscription_id": "{{user `subscription_id`}}",
+  
+      "managed_image_resource_group_name": "{{user `resource_group_name`}}",
+      "managed_image_name": "{{user `imagename`}}",
+  
+      "os_type": "Linux",
+      "image_publisher": "Canonical",
+      "image_offer": "UbuntuServer",
+      "image_sku": "18.04-LTS",
+  
+      "azure_tags": {
+          "dept": "Engineering",
+          "task": "Image deployment"
+      },
+  
+      "location": "westus2",
+      "vm_size": "Standard_DS2_v2"
+    }],
+    "provisioners": [{
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "inline": [
+        "echo 'Starting DataStax Installation Process.'",
+        "apt-get update",
+        "apt-get install -y openjdk-8-jre",
+        "java -version",
+        "apt-get install libaio1",
+        "echo \"deb https://debian.datastax.com/enterprise/ stable main\" | sudo tee -a /etc/apt/sources.list.d/datastax.sources.list",
+        "curl -L https://debian.datastax.com/debian/repo_key | sudo apt-key add -",
+        "apt-get update",
+        "apt-get install -y dse-full"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "type": "shell"
+    }]
+  }

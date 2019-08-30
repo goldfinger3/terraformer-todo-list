@@ -1,4 +1,5 @@
 GROUPNAME="adrons-kubbies"
 LOCATION="westus2"
+LOCATIONLONG="West US 2"
 
-terraform apply -auto-approve -var "test=$LOCATION" -var "res_group=$GROUPNAME"
+terraform apply -auto-approve -var "locationlong=$LOCATIONLONG" -var "res_group=$GROUPNAME"

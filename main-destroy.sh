@@ -1,4 +1,5 @@
 GROUPNAME="adrons-kubbies"
 LOCATION="westus2"
+LOCATIONLONG="West US 2"
 
-terraform destroy -var "test=$LOCATION" -var "res_group=$GROUPNAME"
+terraform destroy -var "locationlong=$LOCATIONLONG" -var "res_group=$GROUPNAME"

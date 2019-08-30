@@ -5,6 +5,7 @@
     "tenant_id": "{{env `TF_VAR_tenant_id`}}",
     "subscription_id": "{{env `TF_VAR_subscription_id`}}",
     "imagename": "",
+    "location": "",
     "storage_account": "adronsimagestorage",
     "resource_group_name": "adrons-images"
   },
@@ -30,7 +31,7 @@
         "task": "Image deployment"
     },
 
-    "location": "westus2",
+    "location": "{{user `location`}}",
     "vm_size": "Standard_DS2_v2"
   }],
   "provisioners": [{

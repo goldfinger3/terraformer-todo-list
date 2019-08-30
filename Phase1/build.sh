@@ -24,8 +24,8 @@ az storage account create \
 
 echo 'Building Apache Cassandra Node Image.'
 
-packer build -var 'imagename='$IMAGECASSANDRA -var 'adronsimagestorage='$STORAGENAME node-cassandra.json
+packer build -var 'imagename='$IMAGECASSANDRA -var 'adronsimagestorage='$STORAGENAME -var 'location='$LOCATION node-cassandra.json
 
 echo 'Building DataStax Enterprise Node Image.'
 
-packer build -var 'imagename='$IMAGEDSE -var 'adronsimagestorage='$STORAGENAME node-dse.json
+packer build -var 'imagename='$IMAGEDSE -var 'adronsimagestorage='$STORAGENAME -var 'location='$LOCATION node-dse.json

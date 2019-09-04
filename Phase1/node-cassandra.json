@@ -7,7 +7,7 @@
     "imagename": "",
     "location": "",
     "storage_account": "adronsimagestorage",
-    "resource_group_name": "adrons-images"
+    "resource_group_name": "adronsimages"
   },
 
   "builders": [{

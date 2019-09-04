@@ -1,4 +1,4 @@
-GROUPNAME="adrons-images"
+GROUPNAME="adrons_images"
 LOCATION="westus2"
 STORAGENAME="adronsimagestorage"
 # Images
@@ -9,6 +9,9 @@ echo 'Deleting existing images.'
 
 az image delete -g $GROUPNAME -n $IMAGECASSANDRA
 az image delete -g $GROUPNAME -n $IMAGEDSE
+
+echo 'Deleting resource group.'
+az group delete -n $GROUPNAME
 
 echo 'Deleteing storage account.'
 

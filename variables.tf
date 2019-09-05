@@ -5,3 +5,6 @@ variable "clientsecret" {}
 variable "locationlong" {}
 variable "location" {}
 variable "res_group" {}
+
+variable "imagenameCassandra" {}
+variable "imagenameDataStaxEnterprise" {}

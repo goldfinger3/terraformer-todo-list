@@ -19,10 +19,8 @@ az storage account create \
  --sku Standard_LRS \
  --kind Storage
 
-echo 'Building Apache Cassandra Node Image.'
-
-packer build -var 'imagename='$IMAGECASSANDRA -var 'adronsimagestorage='$STORAGENAME -var 'location='$LOCATION -var 'resource_group_name='$GROUPNAME node-cassandra.json
-
 echo 'Building DataStax Enterprise Node Image.'
+packer build -var 'imagename='$IMAGEDSE -var 'adronsimagestorage='$STORAGENAME -var 'location='$LOCATION -var 'resource_group_name='$GROUPNAME node-dse.json
 
-packer build -var 'imagename='$IMAGEDSE -var 'adronsimagestorage='$STORAGENAME -var 'location='$LOCATION 'resource_group_name='$GROUPNAME node-dse.json
+echo 'Building Apache Cassandra Node Image.'
+packer build -var 'imagename='$IMAGECASSANDRA -var 'adronsimagestorage='$STORAGENAME -var 'location='$LOCATION -var 'resource_group_name='$GROUPNAME node-cassandra.json

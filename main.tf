@@ -22,6 +22,6 @@ output "lb_hostname" {
   value = kubernetes_service.nginx.load_balancer_ingress[0].hostname
 }
 
-output "test_out" {
+output "location_long" {
   value = var.locationlong
 }

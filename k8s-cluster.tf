@@ -1,7 +1,7 @@
 resource "azurerm_kubernetes_cluster" "test" {
   name                = "acctestaks1"
-  location            = "${azurerm_resource_group.adrons_resource_group_workspace.location}"
-  resource_group_name = "${azurerm_resource_group.adrons_resource_group_workspace.name}"
+  location            = "${azurerm_resource_group.adronsworkspace.location}"
+  resource_group_name = "${azurerm_resource_group.adronsworkspace.name}"
   dns_prefix          = "acctestagent1"
 
   agent_pool_profile {
